@@ -1,0 +1,61 @@
+﻿@model Online_Farmers_Training.Models.Training
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Details of the training</h2>
+
+<div>
+    <h4>Farmers Training</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainerName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainerName)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainingTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainingTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.TrainingId }) |*@
+    @Html.ActionLink("Back to List", "Index")|
+    @Html.ActionLink("Apply", "Create", "TrainingApplications")
+</p>

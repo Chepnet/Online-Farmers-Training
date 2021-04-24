@@ -1,0 +1,96 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IEnumerable<Online_Farmers_Training.Models.Training>
+@*@model WebApplication2.FarmersTraining*@
+
+
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+@*@Html.ActionLink("Back", "Index", "FarmersTrainings")*@
+@using (Html.BeginForm("Search", "Home", FormMethod.Get))
+{
+
+    <b> Search Option: </b>@Html.RadioButton("option", "Event") <text >Event</text> @Html.RadioButton("option", "TrainerName") <text> TrainerName </text>
+    @Html.RadioButton("option", "TrainingTime")<text>TrainingTime</text>      @Html.TextBox("search")
+    <input type="submit" name="submit" value="Search" />
+
+    @Html.ActionLink("Event List", "Trainings", "Home")
+
+}
+<table class="table"
+       border="1">
+    <tr>
+        <th>
+            @Html.ActionLink("EventName", "Search", new
+       {
+           sort = ViewBag.SortByEventName,
+           option = @Context.Request.Query["option"],
+           search = @Context.Request.Query["search"]
+       })
+        </th>
+        <th> @Html.DisplayNameFor(model => model.Description) </th>
+        <th>
+            @Html.ActionLink("TrainerName", "Search", new
+            {
+                sort = ViewBag.SortByTrainerName,
+                option = @Context.Request.Query["option"],
+                search = @Context.Request.Query["search"]
+    })
+        </th>
+
+
+
+        <th> @Html.DisplayNameFor(model => model.TrainingTime) </th>
+        <th>
+            @Html.ActionLink("Cost", "Search", new
+            {
+                sort = ViewBag.SortByTrainerNa,
+                option = @Context.Request.Query["option"],
+                search = @Context.Request.Query["search"]
+    })
+        </th>
+
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="3"> Records not found</td>
+        </tr>
+    }
+    else
+    {
+
+        foreach (var item in Model)
+        {
+<tr>
+    <td> @Html.DisplayFor(modelItem => item.EventName) </td>
+    <td> @Html.DisplayFor(modelItem => item.Description) </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TrainerName)
+    </td>
+
+    <td> @Html.DisplayFor(modelItem => item.TrainingTime) </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Cost)
+    </td>
+    <td> @Html.ActionLink(" View Details", "Viewdetails","Home", new { id = item.TrainingId })</td>
+
+
+</tr>
+
+        }
+    }
+</table>
+
+@*@Html.PagedListPager(Model, pageNumber => Url.Action("Search", new{
+    pageNumber,
+    option = Request.QueryString["option"],
+    search = Request.QueryString["search"],
+    sort = Request.QueryString["sort"]
+}))*@
